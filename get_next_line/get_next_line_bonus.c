@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*read_next_buffer(int fd);
 static char	*get_one_nl(int fd, char *remained_str);
@@ -19,28 +19,28 @@ static char	*get_first_line(char *first_part);
 
 char	*get_next_line(int fd)
 {
-	static char	*remained_str;
+	static char	*remained_str[MAX_FD];
 	char		*first_part;
 	char		*next_part;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE < 1 || fd >= MAX_FD)
 		return (NULL);
 	next_part = read_next_buffer(fd);
-	first_part = remained_str;
+	first_part = remained_str[fd];
 	if (first_part)
-		remained_str = ft_strjoin(first_part, next_part);
+		remained_str[fd] = ft_strjoin(first_part, next_part);
 	else
-		remained_str = ft_strjoin(NULL, next_part);
+		remained_str[fd] = ft_strjoin(NULL, next_part);
 	if (first_part)
 		free (first_part);
 	if (next_part)
 		free (next_part);
-	if (!remained_str)
+	if (!remained_str[fd])
 		return (NULL);
-	if (!ft_strchr(remained_str, '\n'))
-		remained_str = get_one_nl(fd, remained_str);
-	first_part = ft_strdup(remained_str);
-	remained_str = remove_first_line(remained_str);
+	if (!ft_strchr(remained_str[fd], '\n'))
+		remained_str[fd] = get_one_nl(fd, remained_str[fd]);
+	first_part = ft_strdup(remained_str[fd]);
+	remained_str[fd] = remove_first_line(remained_str[fd]);
 	first_part = get_first_line(first_part);
 	return (first_part);
 }
