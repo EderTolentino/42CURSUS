@@ -101,7 +101,15 @@ static char	*remove_first_line(char *big_str)
 
 	if (!big_str)
 		return (NULL);
-	line1_len = strlen_until_nl(big_str);
+	line1_len = -1;
+	while (big_str[++line1_len])
+	{
+		if (big_str[line1_len] == '\n')
+		{
+			line1_len++;
+			break ;
+		}
+	}
 	big_length = ft_strlen(big_str);
 	remained_str = ft_substr(big_str, line1_len, (big_length - line1_len));
 	if (remained_str[0] == '\0')
@@ -114,22 +122,6 @@ static char	*remove_first_line(char *big_str)
 	return (remained_str);
 }
 
-static int	strlen_until_nl(char *str)
-{
-	size_t	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '\n')
-		{
-			i++;
-			break ;
-		}
-	}
-	return (i);
-}
-
 static char	*get_first_line(char *first_part)
 {
 	char	*first_line;
@@ -138,8 +130,15 @@ static char	*get_first_line(char *first_part)
 
 	if (!first_part || first_part[0] == '\0')
 		return (NULL);
-	line1_len = strlen_until_nl(first_part);
-	printf("LINE1_LEN = %ld \n", line1_len);
+	line1_len = -1;
+	while (first_part[++line1_len])
+	{
+		if (first_part[line1_len] == '\n')
+		{
+			line1_len++;
+			break ;
+		}
+	}
 	first_line = (char *)malloc(sizeof(char) * (line1_len + 1));
 	if (!first_line)
 		return (NULL);
@@ -147,7 +146,6 @@ static char	*get_first_line(char *first_part)
 	while (++i < line1_len)
 		first_line[i] = first_part[i];
 	first_line[i] = '\0';
-	printf("FIRST INSIDE = %s \n", first_line);
 	free (first_part);
 	return (first_line);
 }
