@@ -17,13 +17,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define MAX_FD 1024;
+# define MAX_FD 1024
 
-char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *src);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
+char	*get_next_line(int fd);
 
 #endif

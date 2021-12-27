@@ -18,9 +18,7 @@ size_t	ft_strlen(const char *s)
 
 	c = 0;
 	while (s[c] != '\0')
-	{
 		c++;
-	}
 	return (c);
 }
 
@@ -70,10 +68,12 @@ char	*ft_strdup(const char *src)
 	int		size;
 	int		i;
 
+	if (!src)
+		return (NULL);
 	size = ft_strlen(src);
 	copy = (char *)malloc((size + 1) * sizeof(char));
-	if (copy == NULL)
-		return (0);
+	if (!copy)
+		return (NULL);
 	i = 0;
 	while (src[i] != '\0')
 	{

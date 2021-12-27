@@ -41,8 +41,7 @@ char	*get_next_line(int fd)
 		remained_str = get_one_nl(fd, remained_str);
 	first_part = ft_strdup(remained_str);
 	remained_str = remove_first_line(remained_str);
-	first_part = get_first_line(first_part);
-	return (first_part);
+	return (get_first_line(first_part));
 }
 
 static char	*read_next_buffer(int fd)
@@ -54,7 +53,7 @@ static char	*read_next_buffer(int fd)
 	if (!buffer)
 		return (NULL);
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
-	if (bytes_read < 0 || bytes_read > BUFFER_SIZE)
+	if (bytes_read <= 0 || bytes_read > BUFFER_SIZE)
 	{
 		free(buffer);
 		return (NULL);
@@ -139,8 +138,6 @@ static char	*get_first_line(char *first_part)
 		}
 	}
 	first_line = (char *)malloc(sizeof(char) * (line1_len + 1));
-	if (!first_line)
-		return (NULL);
 	i = -1;
 	while (++i < line1_len)
 		first_line[i] = first_part[i];
