@@ -10,7 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-INCLUDE=libft.h
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror
 
@@ -41,11 +40,11 @@ $(NAME): 	$(OBJS)
 			ar rcs $(NAME) $(OBJS)
 			ranlib $(NAME)
 
-$(OBJS):	$(SRCS) $(INCLUDE)
-			$(CC) $(CFLAGS) -I$(INCLUDE) -c $(SRCS)			
+$(OBJS):	$(SRCS)
+			$(CC) $(CFLAGS) -c $(SRCS)			
 
-$(OBJS_BONUS):	$(BONUS) $(INCLUDE)
-				$(CC) $(CFLAGS) -I$(INCLUDE) -c $(BONUS)
+$(OBJS_BONUS):	$(BONUS)
+				$(CC) $(CFLAGS) -c $(BONUS)
 
 clean:
 		rm -f $(OBJS) $(OBJS_BONUS)

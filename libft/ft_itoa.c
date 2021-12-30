@@ -61,10 +61,8 @@ static char	*convert_int(int n, int n_len, char *str)
 char	*ft_itoa(int n)
 {
 	char	*str;
-	int		i;
 	int		n_len;
 
-	i = 0;
 	if (n == 0)
 	{
 		str = (char *)malloc(sizeof(char) * 2);
