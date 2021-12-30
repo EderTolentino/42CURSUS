@@ -27,7 +27,6 @@ int	ft_put_pointer_hexa(void *ptr)
 	str = ft_strjoin(prefix, address_hex);
 	ft_putstr_fd(str, 1);
 	count_chars = ft_strlen(str);
-	free(prefix);
 	free(address_hex);
 	free(str);
 	return (count_chars);

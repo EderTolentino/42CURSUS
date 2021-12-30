@@ -19,7 +19,8 @@ int	ft_put_str(char *str)
 
 	if (!str)
 	{
-		return (0);
+		ft_putstr_fd("(null)", 1);
+		return (6);
 	}
 	count_chars = ft_strlen(str);
 	ft_putstr_fd(str, 1);
